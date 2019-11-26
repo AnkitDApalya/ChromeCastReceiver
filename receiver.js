@@ -3,7 +3,7 @@ const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
 const playerManager = castContext.getPlayerManager();
 
 const TAG = 'receiver';
-const LIVE_MEDIA_URL = 'https://streaming.cast.pe/devsummit/ds.smil/playlist.m3u8';
+const LIVE_MEDIA_URL = 'https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8';
 const LIVE_MEDIA_METADATA_SERVICE_URI =
         'https://us-central1-cast-tses.cloudfunctions.net/io-2019-live';
 
@@ -32,8 +32,7 @@ playerManager.setMessageInterceptor(
       request.media.streamType = cast.framework.messages.StreamType.LIVE;
       request.media.contentUrl = LIVE_MEDIA_URL;
 
-      loadGuideData();
-
+      
       playerManager.removeSupportedMediaCommands(
           cast.framework.messages.Command.SEEK, true);
 
