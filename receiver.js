@@ -1,5 +1,4 @@
 const castContext = cast.framework.CastReceiverContext.getInstance();
-const castDebugLogger = cast.debug.CastDebugLogger.getInstance();
 const playerManager = castContext.getPlayerManager();
 
 const TAG = 'receiver';
@@ -17,7 +16,6 @@ castContext.addEventListener(
       const loadRequest =
       new cast.framework.messages.LoadRequestData(mediaInfo);
 
-      castDebugLogger.info(TAG, 'Receiver started, initiating load request.');
       playerManager.load(loadRequest);
     });
 
@@ -27,7 +25,6 @@ castContext.addEventListener(
 playerManager.setMessageInterceptor(
     cast.framework.messages.MessageType.LOAD,
     (request) => {
-      castDebugLogger.info(TAG, 'Intercepting LOAD request');
       request.autoplay = true;
       request.media.streamType = cast.framework.messages.StreamType.LIVE;
       request.media.contentUrl = LIVE_MEDIA_URL;
@@ -52,7 +49,6 @@ playerManager.setMessageInterceptor(
       // if the SEEK supported media command is disabled, block seeking
       if (!(playerManager.getSupportedMediaCommands() &
       cast.framework.messages.Command.SEEK)) {
-        castDebugLogger.info(TAG, 'Seek blocked.');
         return null;
       }
 
